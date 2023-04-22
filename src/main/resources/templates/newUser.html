@@ -19,6 +19,14 @@
         <label for="email">Email: </label>
         <input type="text" th:field="*{email}" id="email">
         <br><br>
+        <label>Roles:
+        <input type="checkbox" name="roles"
+               th:each="role : ${roles}"
+               th:text="${role.name}"
+               th:value="${role.id}"
+               th:field="*{roles}"
+        />
+        </label>
         <button type="submit">Submit</button>
     </form>
 </div>
