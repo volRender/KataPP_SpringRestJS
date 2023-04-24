@@ -19,12 +19,17 @@ public class User {
     @Column(name = "name")
     private String firstName;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "email")
     private String email;
 
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "password")
+    private String password;
 
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),

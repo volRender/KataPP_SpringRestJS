@@ -11,5 +11,6 @@ public interface UserService {
     public void setPasswordEncoder(User user);
     public User getUser(Long id);
     public void deleteUser(Long id);
-    public User findByFirstName(String firstName);
+    public User findByEmail(String email);
+    public User findByFirstName(String name);
 }

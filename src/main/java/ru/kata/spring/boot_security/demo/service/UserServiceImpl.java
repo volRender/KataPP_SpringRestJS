@@ -75,15 +75,20 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Transactional
     @Override
-    public User findByFirstName(String firstName) {
-        return userRepository.findByFirstName(firstName);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
+    @Transactional
     @Override
-    public UserDetails loadUserByUsername(@Param("username") String username) throws UsernameNotFoundException {
-        User user = findByFirstName(username);
+    public User findByFirstName(String name) {
+        return userRepository.findByFirstName(name);
+    }
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = findByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException("User with name " + username + " не найден!");
+            throw new UsernameNotFoundException("User with email " + email + " не найден!");
         }
         return new org.springframework.security.core.userdetails.User(user.getFirstName(), user.getPassword(),
                  mapRolesToAuthorities(user.getRoles()));
