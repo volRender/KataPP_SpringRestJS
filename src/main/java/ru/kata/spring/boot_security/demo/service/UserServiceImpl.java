@@ -59,12 +59,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Transactional
     @Override
     public User getUser(Long id) {
-        User user = new User();
         Optional<User> userOpt = userRepository.findById(id);
-        if(userOpt.isPresent()) {
-            user = userOpt.get();
-        }
-        return user;
+        return userOpt.orElse(null);
     }
 
     @Transactional
