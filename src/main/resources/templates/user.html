@@ -20,8 +20,7 @@
     <td th:utext="${userOnly.getFirstName()}"></td>
     <td th:utext="${userOnly.getPassword()}"></td>
     <td th:utext="${userOnly.getEmail()}"></td>
-    <td th:utext="${userOnly.getRoles()}"></td>
-    <td><ul th:each="role : ${userOnly.roles}">
+    <td><ul th:each="role : ${userOnly.getRoles()}">
       <li th:text="${role.getName()}" class="list-item"></li>
     </ul></td>
   </tr>
