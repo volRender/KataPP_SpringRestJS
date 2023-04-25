@@ -53,10 +53,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Transactional
     @Override
-    public void setPasswordEncoder(User user) {
+    public void setPasswordEncoder(User user, String password) {
         Pattern BCRYPT_PATTERN = Pattern.compile("^\\$2[ayb]\\$.{56}$");
-        if(!user.getPassword().matches(String.valueOf(BCRYPT_PATTERN))) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(!password.matches(String.valueOf(BCRYPT_PATTERN))) {
+            user.setPassword(passwordEncoder.encode(password));
         }
     }
 
@@ -85,14 +85,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.findByFirstName(name);
     }
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = findByEmail(email);
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        User user = findByEmail(name);
         if (user == null) {
-            throw new UsernameNotFoundException("User with email " + email + " не найден!");
+            throw new UsernameNotFoundException("User with name " + name + " не найден!");
         }
         return new org.springframework.security.core.userdetails.User(user.getFirstName(), user.getPassword(),
                  mapRolesToAuthorities(user.getRoles()));
     }
+
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toSet());

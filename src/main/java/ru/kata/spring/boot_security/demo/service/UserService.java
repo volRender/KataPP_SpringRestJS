@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService {
     public List<User> allUsers();
     public void addOrUpdateUser(User user, Long id);
-    public void setPasswordEncoder(User user);
+    public void setPasswordEncoder(User user, String password);
     public User getUser(Long id);
     public void deleteUser(Long id);
     public User findByEmail(String email);
