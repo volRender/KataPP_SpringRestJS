@@ -46,16 +46,29 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Transactional
     @Override
-    public void addOrUpdateUser(User user, Long id) {
-        user.setId(id);
+    public void addUser(User user) {
         userRepository.save(user);
     }
 
     @Transactional
     @Override
+    public User updateUser(User user) {
+        User editedUser = userRepository.findByFirstName(user.getFirstName());
+        editedUser.setEmail(user.getEmail());
+        editedUser.setFirstName(user.getFirstName());
+        editedUser.setLastName(user.getLastName());
+        editedUser.setAge(user.getAge());
+        if (!user.getPassword().isEmpty()) {
+            editedUser.setPassword(user.getPassword());
+        }
+        editedUser.setRoles(user.getRoles());
+        return editedUser;
+    }
+
+    @Transactional
+    @Override
     public void setPasswordEncoder(User user, String password) {
-        Pattern BCRYPT_PATTERN = Pattern.compile("^\\$2[ayb]\\$.{56}$");
-        if(!password.matches(String.valueOf(BCRYPT_PATTERN))) {
+        if (password.length() > 0) {
             user.setPassword(passwordEncoder.encode(password));
         }
     }

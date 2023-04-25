@@ -36,16 +36,16 @@ public class AdminController {
 	}
 
 	@PostMapping("/users")
-	public String saveUser(User user, String rawPassword) {
-		userService.setPasswordEncoder(user, rawPassword);
-		userService.addOrUpdateUser(user, user.getId());
+	public String saveUser(User user, String password) {
+		userService.setPasswordEncoder(user, password);
+		userService.addUser(user);
 		return "redirect:/admin";
 	}
 
-	@PutMapping("/users/{id}")
-	public String editUser(User user, @PathVariable("id") long id, String rawPassword) {
-		userService.setPasswordEncoder(user, rawPassword);
-		userService.addOrUpdateUser(user, id);
+	@PatchMapping("/users/{id}")
+	public String editUser(User user, String password) {
+		userService.setPasswordEncoder(user, password);
+		userService.updateUser(user);
 		return "redirect:/admin";
 	}
 

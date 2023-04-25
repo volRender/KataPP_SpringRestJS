@@ -138,7 +138,7 @@
                                         <label class="form-label mt-3 mb-0" for="newEmail"><strong>Email</strong></label>
                                         <input class="form-control" id="newEmail" type="email" name="email" required>
                                         <label class="form-label mt-3 mb-0" for="newPassword"><strong>Password</strong></label>
-                                        <input class="form-control" id="newPassword" type="password" name="rawPassword">
+                                        <input class="form-control" id="newPassword" type="password" name="password">
                                         <label class="form-label mt-3 mb-0" for="newRoles"><strong>Role</strong></label>
                                         <select class="form-select" id="newRoles" name="roles" multiple th:size="${#sets.size(roles)}" required>
                                             <option th:each="role: ${roles}" th:value="${role.id}" th:text="${#strings.substringAfter(role.name, 'ROLE_')}"></option>
@@ -168,7 +168,7 @@
 
             <div class="modal-body p-0">
                 <div class="col-6 mx-auto text-center mb-3">
-                    <form id="editForm" th:method="put">
+                    <form id="editForm" th:method="patch">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <label class="col-form-label mt-3 mb-0" for="editId"><strong>ID</strong></label>
                         <input class="form-control" id="editId" type="text" placeholder="ID" name="id" disabled>
@@ -181,7 +181,7 @@
                         <label class="form-label mt-3 mb-0" for="editEmail"><strong>Email</strong></label>
                         <input class="form-control" id="editEmail" type="email" name="email" required>
                         <label class="form-label mt-3 mb-0" for="editPassword"><strong>Password</strong></label>
-                        <input class="form-control" id="editPassword" type="password" name="rawPassword">
+                        <input class="form-control" id="editPassword" type="password" name="password">
                         <label class="form-label mt-3 mb-0" for="editRoles"><strong>Role</strong></label>
                         <select class="form-select" id="editRoles" name="roles" multiple th:size="${#sets.size(roles)}" required>
                             <option th:each="role: ${roles}" th:value="${role.id}" th:text="${#strings.substringAfter(role.name, 'ROLE_')}"></option>
