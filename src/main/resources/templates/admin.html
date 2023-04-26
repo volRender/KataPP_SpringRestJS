@@ -239,73 +239,73 @@
     </div>
 </div>
 
-<script>
-    const userEdit = document.getElementById('userEdit')
+<!--<script>-->
+<!--    const userEdit = document.getElementById('userEdit')-->
 
-    userEdit.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget
-        const editId = button.getAttribute('data-bs-id')
-        userEdit.querySelector('.modal-body form').action = '/admin/users/' + editId
-        userEdit.querySelector('.modal-body input[id="editId"]').value = button.getAttribute('data-bs-id')
-        userEdit.querySelector('.modal-body input[id="editFirstName"]').value = button.getAttribute('data-bs-firstName')
-        userEdit.querySelector('.modal-body input[id="editLastName"]').value = button.getAttribute('data-bs-lastName')
-        userEdit.querySelector('.modal-body input[id="editAge"]').value = button.getAttribute('data-bs-age')
-        userEdit.querySelector('.modal-body input[id="editEmail"]').value = button.getAttribute('data-bs-email')
+<!--    userEdit.addEventListener('show.bs.modal', event => {-->
+<!--        const button = event.relatedTarget-->
+<!--        const editId = button.getAttribute('data-bs-id')-->
+<!--        userEdit.querySelector('.modal-body form').action = '/admin/users/' + editId-->
+<!--        userEdit.querySelector('.modal-body input[id="editId"]').value = button.getAttribute('data-bs-id')-->
+<!--        userEdit.querySelector('.modal-body input[id="editFirstName"]').value = button.getAttribute('data-bs-firstName')-->
+<!--        userEdit.querySelector('.modal-body input[id="editLastName"]').value = button.getAttribute('data-bs-lastName')-->
+<!--        userEdit.querySelector('.modal-body input[id="editAge"]').value = button.getAttribute('data-bs-age')-->
+<!--        userEdit.querySelector('.modal-body input[id="editEmail"]').value = button.getAttribute('data-bs-email')-->
 
-        const optionsRole = userEdit.querySelector('.modal-body select').getElementsByTagName('option');
-        let arrRoleId = button.getAttribute('data-bs-roles').matchAll(/id=\d+/g)
-        for (const strId of arrRoleId) {
-            let optId = strId.toString().slice(3)
-            for (let i = 0; i < optionsRole.length; i++) {
-                if (optionsRole[i].value === optId) {
-                    optionsRole[i].selected = true
-                }
-            }
-        }
-    })
+<!--        const optionsRole = userEdit.querySelector('.modal-body select').getElementsByTagName('option');-->
+<!--        let arrRoleId = button.getAttribute('data-bs-roles').matchAll(/id=\d+/g)-->
+<!--        for (const strId of arrRoleId) {-->
+<!--            let optId = strId.toString().slice(3)-->
+<!--            for (let i = 0; i < optionsRole.length; i++) {-->
+<!--                if (optionsRole[i].value === optId) {-->
+<!--                    optionsRole[i].selected = true-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    })-->
 
-    // Отчистка выбранных ролей после закрытия окна userEdit
-    userEdit.addEventListener('hidden.bs.modal', event => {
-        const optionsRole = userEdit.querySelector('.modal-body select').getElementsByTagName('option');
-        for (let i = 0; i < optionsRole.length; i++) {
-            optionsRole[i].selected = false
-        }
-    })
-</script>
+<!--    // Отчистка выбранных ролей после закрытия окна userEdit-->
+<!--    userEdit.addEventListener('hidden.bs.modal', event => {-->
+<!--        const optionsRole = userEdit.querySelector('.modal-body select').getElementsByTagName('option');-->
+<!--        for (let i = 0; i < optionsRole.length; i++) {-->
+<!--            optionsRole[i].selected = false-->
+<!--        }-->
+<!--    })-->
+<!--</script>-->
 
-<script>
-    const userDelete = document.getElementById('userDelete')
+<!--<script>-->
+<!--    const userDelete = document.getElementById('userDelete')-->
 
-    userDelete.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget
-        const deleteId = button.getAttribute('data-bs-id')
-        userDelete.querySelector('.modal-body form').action = '/admin/users/' + deleteId
-        userDelete.querySelector('.modal-body input[id="deleteId"]').value = button.getAttribute('data-bs-id')
-        userDelete.querySelector('.modal-body input[id="deleteFirstName"]').value = button.getAttribute('data-bs-firstName')
-        userDelete.querySelector('.modal-body input[id="deleteLastName"]').value = button.getAttribute('data-bs-lastName')
-        userDelete.querySelector('.modal-body input[id="deleteAge"]').value = button.getAttribute('data-bs-age')
-        userDelete.querySelector('.modal-body input[id="deleteEmail"]').value = button.getAttribute('data-bs-email')
+<!--    userDelete.addEventListener('show.bs.modal', event => {-->
+<!--        const button = event.relatedTarget-->
+<!--        const deleteId = button.getAttribute('data-bs-id')-->
+<!--        userDelete.querySelector('.modal-body form').action = '/admin/users/' + deleteId-->
+<!--        userDelete.querySelector('.modal-body input[id="deleteId"]').value = button.getAttribute('data-bs-id')-->
+<!--        userDelete.querySelector('.modal-body input[id="deleteFirstName"]').value = button.getAttribute('data-bs-firstName')-->
+<!--        userDelete.querySelector('.modal-body input[id="deleteLastName"]').value = button.getAttribute('data-bs-lastName')-->
+<!--        userDelete.querySelector('.modal-body input[id="deleteAge"]').value = button.getAttribute('data-bs-age')-->
+<!--        userDelete.querySelector('.modal-body input[id="deleteEmail"]').value = button.getAttribute('data-bs-email')-->
 
-        const optionsRole = userDelete.querySelector('.modal-body select').getElementsByTagName('option');
-        let arrRoleId = button.getAttribute('data-bs-roles').matchAll(/id=\d+/g)
-        for (const strId of arrRoleId) {
-            let optId = strId.toString().slice(3)
-            for (let i = 0; i < optionsRole.length; i++) {
-                if (optionsRole[i].value === optId) {
-                    optionsRole[i].selected = true
-                }
-            }
-        }
-    })
+<!--        const optionsRole = userDelete.querySelector('.modal-body select').getElementsByTagName('option');-->
+<!--        let arrRoleId = button.getAttribute('data-bs-roles').matchAll(/id=\d+/g)-->
+<!--        for (const strId of arrRoleId) {-->
+<!--            let optId = strId.toString().slice(3)-->
+<!--            for (let i = 0; i < optionsRole.length; i++) {-->
+<!--                if (optionsRole[i].value === optId) {-->
+<!--                    optionsRole[i].selected = true-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    })-->
 
-    // Отчистка выбранных ролей после закрытия окна userDelete
-    userDelete.addEventListener('hidden.bs.modal', event => {
-        const optionsRole = userDelete.querySelector('.modal-body select').getElementsByTagName('option');
-        for (let i = 0; i < optionsRole.length; i++) {
-            optionsRole[i].selected = false
-        }
-    })
-</script>
+<!--    // Отчистка выбранных ролей после закрытия окна userDelete-->
+<!--    userDelete.addEventListener('hidden.bs.modal', event => {-->
+<!--        const optionsRole = userDelete.querySelector('.modal-body select').getElementsByTagName('option');-->
+<!--        for (let i = 0; i < optionsRole.length; i++) {-->
+<!--            optionsRole[i].selected = false-->
+<!--        }-->
+<!--    })-->
+<!--</script>-->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
