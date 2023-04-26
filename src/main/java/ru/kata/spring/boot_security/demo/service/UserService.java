@@ -7,8 +7,7 @@ import java.util.List;
 @Service
 public interface UserService {
     public List<User> allUsers();
-    public void addUser(User user);
-    public User updateUser(User user);
+    public void addOrUpdateUser(User user);
     public void setPasswordEncoder(User user);
     public User getUser(Long id);
     public void deleteUser(Long id);

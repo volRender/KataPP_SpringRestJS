@@ -46,31 +46,14 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Transactional
     @Override
-    public void addUser(User user) {
+    public void addOrUpdateUser(User user) {
         userRepository.save(user);
     }
 
     @Transactional
     @Override
-    public User updateUser(User user) {
-        User editedUser = userRepository.findByFirstName(user.getFirstName());
-        editedUser.setEmail(user.getEmail());
-        editedUser.setFirstName(user.getFirstName());
-        editedUser.setLastName(user.getLastName());
-        editedUser.setAge(user.getAge());
-        if (!user.getPassword().isEmpty()) {
-            editedUser.setPassword(user.getPassword());
-        }
-        editedUser.setRoles(user.getRoles());
-        return editedUser;
-    }
-
-    @Transactional
-    @Override
     public void setPasswordEncoder(User user) {
-        if (user.getPassword().length() > 0) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
     }
 
     @Transactional
