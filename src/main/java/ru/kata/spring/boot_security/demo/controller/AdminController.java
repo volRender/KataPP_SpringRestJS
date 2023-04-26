@@ -50,10 +50,9 @@ public class AdminController {
 		userService.addOrUpdateUser(user);
 		return user;
 	}
-//
-//	@DeleteMapping("/users/{id}")
-//	public String deleteUser(@PathVariable("id") long id) {
-//		userService.deleteUser(id);
-//		return "redirect:/admin";
-//	}
+
+	@DeleteMapping("/users/{id}")
+	public void deleteUser(@PathVariable Long id) {
+		userService.deleteUser(id);
+	}
 }
