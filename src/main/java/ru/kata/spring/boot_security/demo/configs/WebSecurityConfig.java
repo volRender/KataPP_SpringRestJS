@@ -25,21 +25,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/index").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .successHandler(successUserHandler)
-                .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login")
-                .permitAll();
+        http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
+//                .authorizeRequests()
+//                .antMatchers("/", "/index").permitAll()
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .successHandler(successUserHandler)
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .logoutSuccessUrl("/login")
+//                .permitAll();
     }
 
 //     аутентификация inMemory

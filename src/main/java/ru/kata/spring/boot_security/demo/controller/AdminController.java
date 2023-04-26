@@ -14,8 +14,8 @@ import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 import java.security.Principal;
 import java.util.List;
 
-@Controller
-@RequestMapping("/admin")
+@RestController
+@RequestMapping("/admin/api")
 public class AdminController {
 
 	private final UserService userService;
@@ -27,31 +27,28 @@ public class AdminController {
 		this.roleRepository = roleRepository;
 	}
 
-	@GetMapping
-	public String printUsers(Model model, Principal principal) {
-		model.addAttribute("user", userService.findByFirstName(principal.getName()));
-		model.addAttribute("users", userService.allUsers());
-		model.addAttribute("roles", roleRepository.findAll());
-		return "admin";
+	@GetMapping("/users")
+	public List<User> printUsers() {
+		return userService.allUsers();
 	}
 
-	@PostMapping("/users")
-	public String saveUser(User user, String password) {
-		userService.setPasswordEncoder(user, password);
-		userService.addUser(user);
-		return "redirect:/admin";
-	}
-
-	@PatchMapping("/users/{id}")
-	public String editUser(User user, String password) {
-		userService.setPasswordEncoder(user, password);
-		userService.updateUser(user);
-		return "redirect:/admin";
-	}
-
-	@DeleteMapping("/users/{id}")
-	public String deleteUser(@PathVariable("id") long id) {
-		userService.deleteUser(id);
-		return "redirect:/admin";
-	}
+//	@PostMapping("/users")
+//	public String saveUser(User user, String password) {
+//		userService.setPasswordEncoder(user, password);
+//		userService.addUser(user);
+//		return "redirect:/admin";
+//	}
+//
+//	@PatchMapping("/users/{id}")
+//	public String editUser(User user, String password) {
+//		userService.setPasswordEncoder(user, password);
+//		userService.updateUser(user);
+//		return "redirect:/admin";
+//	}
+//
+//	@DeleteMapping("/users/{id}")
+//	public String deleteUser(@PathVariable("id") long id) {
+//		userService.deleteUser(id);
+//		return "redirect:/admin";
+//	}
 }
