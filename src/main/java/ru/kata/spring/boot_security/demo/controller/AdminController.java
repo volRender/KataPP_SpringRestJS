@@ -37,12 +37,12 @@ public class AdminController {
 		return userService.getUser(id);
 	}
 
-//	@PostMapping("/users")
-//	public String saveUser(User user, String password) {
-//		userService.setPasswordEncoder(user, password);
-//		userService.addUser(user);
-//		return "redirect:/admin";
-//	}
+	@PostMapping("/users")
+	public User saveUser(@RequestBody User user) {
+		userService.setPasswordEncoder(user);
+		userService.addUser(user);
+		return user;
+	}
 //
 //	@PatchMapping("/users/{id}")
 //	public String editUser(User user, String password) {

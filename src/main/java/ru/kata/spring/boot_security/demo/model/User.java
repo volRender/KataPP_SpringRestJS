@@ -19,10 +19,10 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "name")
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "lastname")
     private String lastName;
 
     @Column(name = "age")

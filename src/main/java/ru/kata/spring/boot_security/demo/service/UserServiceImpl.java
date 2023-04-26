@@ -67,9 +67,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Transactional
     @Override
-    public void setPasswordEncoder(User user, String password) {
-        if (password.length() > 0) {
-            user.setPassword(passwordEncoder.encode(password));
+    public void setPasswordEncoder(User user) {
+        if (user.getPassword().length() > 0) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
     }
 
