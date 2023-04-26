@@ -15,9 +15,16 @@ import java.security.Principal;
 @RequestMapping("/admin")
 public class AdminController {
 
+	private final UserService userService;
+
+	@Autowired
+	public AdminController(UserService userService) {
+		this.userService = userService;
+	}
+
 	@GetMapping
-	public String printUsers(Model model, @AuthenticationPrincipal User user) {
-		model.addAttribute("user", user);
+	public String printUsers(Model model, Principal principal) {
+		model.addAttribute("user", userService.findByFirstName(principal.getName()));
 		return "admin";
 	}
 }

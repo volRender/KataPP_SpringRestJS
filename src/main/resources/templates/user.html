@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <title>User page</title>
 </head>
 <body class="bg-light">
@@ -13,19 +11,18 @@
 <header class="header navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-1" >
   <div class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" >
     <div class="d-inline h5 fw-bold">
-      <span th:text="${userOnly.email}">Company name</span>
+      <span th:text="${user.email}">Company name</span>
     </div>
     <div class="d-inline h5 fw-light">
       <span>with roles:</span>
     </div>
-    <div class="d-inline h5 fw-light" th:each="role : ${userOnly.roles}">
+    <div class="d-inline h5 fw-light" th:each="role : ${user.roles}">
       <span th:text="${#strings.substringAfter(role.name, 'ROLE_')}">Role</span>
     </div>
   </div>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
       <form action="/logout" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <button type="submit" class="btn btn-link nav-link px-3">Logout</button>
       </form>
     </div>
@@ -37,8 +34,7 @@
 
     <nav class="d-grid gap-2 nav nav-pills flex-column col-md-3 col-xl-2 d-md-block px-0 pt-2 bg-white">
       <div class="position-sticky" style="height: calc(100vh - 48px); overflow-x: hidden;">
-        <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link" aria-current="page"
-           href="/admin">Admin</a>
+        <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link" aria-current="page" href="/admin">Admin</a>
         <a class="nav-link active" href="/user">User</a>
       </div>
     </nav>
@@ -51,7 +47,7 @@
             <h4 class="m-0">About user</h4>
           </div>
           <div class="col bg-white border border-top-0 rounded-bottom p-3">
-            <table class="table table-striped align-middle"  th:object="${userOnly}">
+            <table class="table table-striped align-middle"  th:object="${user}">
               <thead class="border-top">
               <tr>
                 <th scope="col">ID</th>
@@ -70,7 +66,7 @@
                 <td th:text="*{age}">Age</td>
                 <td th:text="*{email}">Email</td>
                 <td>
-                  <div class="d-inline" th:each="role : ${userOnly.roles}">
+                  <div class="d-inline" th:each="role : ${user.roles}">
                     <span th:text="${#strings.substringAfter(role.name, 'ROLE_')}">Role</span>
                   </div>
                 </td>
@@ -85,9 +81,7 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 </body>
 </html>
