@@ -32,6 +32,11 @@ public class AdminController {
 		return userService.allUsers();
 	}
 
+	@GetMapping("/users/{id}")
+	public User getUser(@PathVariable Long id) {
+		return userService.getUser(id);
+	}
+
 //	@PostMapping("/users")
 //	public String saveUser(User user, String password) {
 //		userService.setPasswordEncoder(user, password);
