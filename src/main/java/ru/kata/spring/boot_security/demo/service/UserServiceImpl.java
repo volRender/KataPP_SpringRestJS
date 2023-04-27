@@ -38,22 +38,38 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Transactional
     @Override
-    public List<User> allUsers() {
+    public Collection<User> allUsers() {
         return userRepository.findAll();
     }
 
     @Transactional
     @Override
-    public void addOrUpdateUser(User user) {
+    public void addUser(User user) {
         userRepository.save(user);
     }
 
     @Transactional
     @Override
+    public User updateUser(User user) {
+        User editedUser = userRepository.findByEmail(user.getUsername());
+        editedUser.setUsername(user.getUsername());
+        editedUser.setFirstName(user.getFirstName());
+        editedUser.setLastName(user.getLastName());
+        editedUser.setAge(user.getAge());
+        if (!user.getPassword().isEmpty()) {
+            editedUser.setPassword(user.getPassword());
+        }
+        editedUser.setRoles(user.getRoles());
+        return editedUser;
+    }
+
+    @Transactional
+    @Override
     public void setPasswordEncoder(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(user.getPassword().length() > 0) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
     }
 
     @Transactional
@@ -75,23 +91,18 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.findByEmail(email);
     }
 
-    @Transactional
-    @Override
-    public User findByFirstName(String name) {
-        return userRepository.findByFirstName(name);
-    }
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         User user = findByEmail(name);
         if (user == null) {
             throw new UsernameNotFoundException("User with name " + name + " не найден!");
         }
-        return new org.springframework.security.core.userdetails.User(user.getFirstName(), user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                  mapRolesToAuthorities(user.getRoles()));
     }
 
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toSet());
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toSet());
     }
 }
