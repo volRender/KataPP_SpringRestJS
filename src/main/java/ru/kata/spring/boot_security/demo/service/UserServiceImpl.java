@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Transactional
     @Override
     public void addUser(User user) {
+        setPasswordEncoder(user);
         userRepository.save(user);
     }
 
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         editedUser.setLastName(user.getLastName());
         editedUser.setAge(user.getAge());
         if (!user.getPassword().isEmpty()) {
+            setPasswordEncoder(user);
             editedUser.setPassword(user.getPassword());
         }
         editedUser.setRoles(user.getRoles());
@@ -98,11 +100,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             throw new UsernameNotFoundException("User with name " + name + " не найден!");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                 mapRolesToAuthorities(user.getRoles()));
-    }
-
-
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toSet());
+                 user.getAuthorities());
     }
 }

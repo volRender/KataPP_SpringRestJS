@@ -34,14 +34,12 @@ public class AdminRESTController {
 
 	@PostMapping
 	public ResponseEntity<User> saveUser(@RequestBody User user) {
-		userService.setPasswordEncoder(user);
 		userService.addUser(user);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 	@PutMapping
 	public ResponseEntity<User> editUser(@RequestBody User user) {
-		userService.setPasswordEncoder(user);
 		userService.updateUser(user);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
